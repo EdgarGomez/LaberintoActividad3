@@ -1967,7 +1967,7 @@ GameObject:
   - component: {fileID: 165840731}
   - component: {fileID: 165840733}
   - component: {fileID: 165840732}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2056,7 +2056,7 @@ Transform:
   m_GameObject: {fileID: 165840722}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.27, y: 4.01, z: -14.17}
+  m_LocalPosition: {x: 26.1, y: 4.01, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4147,7 +4147,7 @@ GameObject:
   - component: {fileID: 534117189}
   - component: {fileID: 534117192}
   - component: {fileID: 534117191}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Paredes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89968,7 +89968,7 @@ Transform:
   m_GameObject: {fileID: 1443867915}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.27, y: 4.86, z: -14.17}
+  m_LocalPosition: {x: 26.1, y: 4.86, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91537,7 +91537,7 @@ Transform:
   m_GameObject: {fileID: 1712492793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.27, y: 4.86, z: -14.17}
+  m_LocalPosition: {x: 26.1, y: 4.86, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -92216,7 +92216,7 @@ GameObject:
   - component: {fileID: 1859272055}
   - component: {fileID: 1859272054}
   - component: {fileID: 1859272053}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92436,7 +92436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1951778645}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: GCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94710,25 +94710,17 @@ PrefabInstance:
       propertyPath: ruta
       value: 
       objectReference: {fileID: 1641280658}
-    - target: {fileID: 4072095900863988112, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
-      propertyPath: m_Radius
-      value: 0.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 4072095900863988112, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
-      propertyPath: m_AutoTraverseOffMeshLink
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6909761431007652125, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.36
       objectReference: {fileID: 0}
     - target: {fileID: 6909761431007652125, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.41
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 6909761431007652125, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.27
+      value: -24.15
       objectReference: {fileID: 0}
     - target: {fileID: 6909761431007652125, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
       propertyPath: m_LocalRotation.w

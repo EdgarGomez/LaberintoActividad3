@@ -2,42 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : State<EnemyController>
-{
+public class PatrolState : State<EnemyController> {
     [SerializeField] private Transform ruta;
 
     private List<Vector3> points = new List<Vector3>();
 
     private int pointIndex;
 
-    private void Start()
-    {
-        foreach (Transform point in ruta)
-        {
+    private void Start() {
+        foreach (Transform point in ruta) {
             points.Add(point.transform.position);
         }
+
         pointIndex = 0;
     }
 
 
-    public override void OnEnterState(EnemyController controller)
-    {
+    public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
     }
 
 
-    public override void OnUpdateState()
-    {
+    public override void OnUpdateState() {
         controller.navMeshAgent.SetDestination(points[pointIndex]);
 
-        if (!controller.navMeshAgent.pathPending && controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance)
-        {
-            controller.ChangeState(controller.getIdleState);
+        if (!controller.navMeshAgent.pathPending &&
+            controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance) {
+            controller.ChangeState(controller.idleState);
+        }
+        
+        if (controller.DetectPlayer()) {
+            controller.ChangeState(controller.lookingState);
+        } else {
+            controller.decreaseAlertTimer();
         }
     }
 
-    public override void OnExitState()
-    {
+    public override void OnExitState() {
+        
+    }
+
+    public void updatePoint() {
         pointIndex++;
         pointIndex %= points.Count;
     }
