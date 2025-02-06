@@ -94710,6 +94710,14 @@ PrefabInstance:
       propertyPath: ruta
       value: 
       objectReference: {fileID: 1641280658}
+    - target: {fileID: 4150148728393898811, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 165840722}
+    - target: {fileID: 4215433739084598940, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6909761431007652125, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.36
@@ -94751,7 +94759,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5628038104207476660, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a0afe8243ed57846b22a7e9f10a9afd, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PatrolState : State<EnemyController> {
     [SerializeField] private Transform ruta;
+    [SerializeField] private float stoppingDistanceRoute;
 
     private List<Vector3> points = new List<Vector3>();
 
@@ -20,6 +21,8 @@ public class PatrolState : State<EnemyController> {
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
+        
+        controller.updateDetectInfo(0);
     }
 
 
@@ -27,7 +30,7 @@ public class PatrolState : State<EnemyController> {
         controller.navMeshAgent.SetDestination(points[pointIndex]);
 
         if (!controller.navMeshAgent.pathPending &&
-            controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance) {
+            controller.navMeshAgent.remainingDistance <= stoppingDistanceRoute) {
             controller.ChangeState(controller.idleState);
         }
         

@@ -9,9 +9,11 @@ public class IdleState : State<EnemyController> {
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-
+        
         coroutineComplete = false;
         waitRoutine = StartCoroutine(waitToContinue());
+        
+        controller.updateDetectInfo(0);
     }
 
     public override void OnExitState() {

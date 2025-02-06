@@ -8,11 +8,12 @@ public class AlertState : State<EnemyController> {
     
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-        Debug.Log("Alert!");
         
         controller.navMeshAgent.updateRotation = false;
         controller.navMeshAgent.SetDestination(controller.transform.position);
         alertCoroutine = StartCoroutine(AlertCoroutine());
+        
+        controller.updateDetectInfo(2);
     }
 
     public override void OnUpdateState() {

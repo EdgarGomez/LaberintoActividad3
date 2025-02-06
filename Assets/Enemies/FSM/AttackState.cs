@@ -2,13 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State<EnemyController>
-{
-    public override void OnUpdateState() {
-        throw new System.NotImplementedException();
+public class AttackState : State<EnemyController> {
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackCharge = 1f;
+
+    public override void OnEnterState(EnemyController controller) {
+        base.OnEnterState(controller);
+        
+        StartCoroutine(AttackCoroutine());
     }
 
-    public override void OnExitState() {
-        throw new System.NotImplementedException();
+    public override void OnUpdateState() { }
+
+    public override void OnExitState() { }
+
+    public IEnumerator AttackCoroutine() {
+        yield return new WaitForSeconds(attackCharge);
+        Debug.Log("Attack attempt!!");
+        if (controller.getDirectionToPlayer().magnitude < attackRange) {
+            Debug.Log("Hit!!");
+            PlayerHealth playerHealth = controller.getPlayerHealth();
+            playerHealth.TakeDamage(15);
+        }
+        controller.ChangeState(controller.chaseState);
     }
 }

@@ -8,6 +8,8 @@ public class LookingState : State<EnemyController> {
 
         controller.navMeshAgent.updateRotation = false;
         controller.navMeshAgent.SetDestination(controller.transform.position);
+        
+        controller.updateDetectInfo(1);
     }
 
     public override void OnUpdateState() {
