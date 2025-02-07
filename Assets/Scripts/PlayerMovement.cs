@@ -29,8 +29,13 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip footstepSound;
     public AudioClip jumpSound;
 
+    private Animator animator;
+    private bool isAttacking;
+    private bool isJumping = false;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
        audioSource = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -42,9 +47,11 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         AplicarSalto();
+        HandleAttack();
         cameraTransform = Camera.main.transform;
 
         PlayFootstepSound();
+        UpdateAnimator();
     }
 
     private void PlayFootstepSound()
@@ -84,15 +91,36 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+            isJumping = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeigh * -2f * gravity);
             audioSource.PlayOneShot(jumpSound);
+            isJumping = true;
         }
 
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+    }
+
+    void HandleAttack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            isAttacking = true;
+        }
+    }
+
+    void UpdateAnimator()
+    {
+        animator.SetBool("IsWalking", isMoving && !isRunning);
+        animator.SetBool("IsRunning", isMoving && isRunning);
+        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool("IsJumping", !isGrounded);
+        animator.SetBool("IsAttacking", isAttacking);
+
+        if (isAttacking) isAttacking = false;
     }
 }
