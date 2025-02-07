@@ -15,8 +15,7 @@ public class InvestigateState : State<EnemyController> {
     
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-
-        Debug.Log("Investigating...");
+        
         lastKnownPosition = controller.getPlayerPosition();
         enableRotation = false;
         
@@ -24,17 +23,19 @@ public class InvestigateState : State<EnemyController> {
     }
 
     public override void OnUpdateState() {
+        Debug.DrawRay(lastKnownPosition,  5 * Vector3.up);
+        
         controller.navMeshAgent.SetDestination(lastKnownPosition);
 
         if (enableRotation) {
             transform.rotation = Quaternion.Slerp(transform.rotation, rotationObjective, Time.deltaTime * 10);
         }
         
-        if (controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance && !isLookingAround) {
+        if (!controller.navMeshAgent.pathPending && controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance && !isLookingAround) {
             lookAroundCoroutine = StartCoroutine(LookAround());
         }
         
-        if (controller.DetectPlayer()) {
+        if (controller.SeePlayer()) {
             controller.ChangeState(controller.chaseState);
         }
     }
@@ -42,6 +43,7 @@ public class InvestigateState : State<EnemyController> {
     public override void OnExitState() {
         enableRotation = false;
         controller.navMeshAgent.updateRotation = true;
+        isLookingAround = false;
         if (isLookingAround) {
             StopCoroutine(lookAroundCoroutine);
         }

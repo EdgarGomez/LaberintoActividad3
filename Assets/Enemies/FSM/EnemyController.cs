@@ -1,21 +1,24 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : Controller {
     [SerializeField] private GameObject player;
     private PlayerHealth _playerHealth;
-    
+
     private State<EnemyController> currentState;
 
-    public PatrolState patrolState;
-    public IdleState idleState;
-    public AlertState alertState;
-    public AttackState attackState;
-    public ChaseState chaseState;
-    public InvestigateState investigateState;
-    public LookingState lookingState;
+    [NonSerialized] public PatrolState patrolState;
+    [NonSerialized] public IdleState idleState;
+    [NonSerialized] public AlertState alertState;
+    [NonSerialized] public AttackState attackState;
+    [NonSerialized] public ChaseState chaseState;
+    [NonSerialized] public InvestigateState investigateState;
+    [NonSerialized] public LookingState lookingState;
 
-    public NavMeshAgent navMeshAgent;
+    [NonSerialized] public NavMeshAgent navMeshAgent;
 
     [SerializeField] private float visionRange;
     [SerializeField] private float closeRange;
@@ -33,6 +36,10 @@ public class EnemyController : Controller {
     [SerializeField] private Material chaseMaterial;
     private MeshRenderer detectInfoMeshRenderer;
 
+    [SerializeField] private RectTransform image;
+    [SerializeField] private Image arrowImage;
+    [SerializeField] private Camera _camera;
+    
     void Start() {
         patrolState = GetComponent<PatrolState>();
         idleState = GetComponent<IdleState>();
@@ -43,15 +50,18 @@ public class EnemyController : Controller {
         lookingState = GetComponent<LookingState>();
 
         _playerHealth = player.GetComponent<PlayerHealth>();
-        
+
         detectInfoMeshRenderer = detectInfo.GetComponent<MeshRenderer>();
-        
+
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         ChangeState(patrolState);
     }
 
     void Update() {
+        PointArrowAtEnemy();
+        updateDetectArrow();
+        Debug.Log(detectTimer);
         if (currentState != null) {
             currentState.OnUpdateState();
         }
@@ -82,11 +92,16 @@ public class EnemyController : Controller {
         return !Physics.Raycast(transform.position, targetDirection, targetDirection.magnitude, obstacleLayer);
     }
 
+    public bool SeePlayer() {
+        if (!(Vector3.Angle(transform.forward, getDirectionToPlayer()) < (visionAngle / 2f))) return false;
+        return !Physics.Raycast(transform.position, getDirectionToPlayer().normalized, getDirectionToPlayer().magnitude,
+            obstacleLayer);
+    }
+
     public void increaseAlertTimer() {
         Vector3 targetDirection = getDirectionToPlayer();
         float targetDistance = targetDirection.magnitude;
         detectTimer += Time.deltaTime * 15 / targetDistance;
-        Debug.Log("Detect: " + detectTimer);
         if (detectTimer >= alertActivateTimer) {
             ChangeState(alertState);
         }
@@ -100,7 +115,7 @@ public class EnemyController : Controller {
     public Vector3 getDirectionToPlayer() {
         return player.transform.position - transform.position;
     }
-    
+
     public Vector3 getPlayerPosition() {
         return player.transform.position;
     }
@@ -113,19 +128,34 @@ public class EnemyController : Controller {
         switch (level) {
             case 0: // Invisible
                 detectInfoMeshRenderer.enabled = false;
+                arrowImage.color = new Color(255, 255, 255, 100);
                 break;
             case 1: // Normal
                 detectInfoMeshRenderer.enabled = true;
                 detectInfoMeshRenderer.material = normalMaterial;
+                arrowImage.color = new Color(255, 255, 255, 100);
                 break;
             case 2: // Alert
                 detectInfoMeshRenderer.enabled = true;
                 detectInfoMeshRenderer.material = alertMaterial;
+                arrowImage.color = new Color(255, 244, 0, 150);
                 break;
             case 3: // Chase
                 detectInfoMeshRenderer.enabled = true;
                 detectInfoMeshRenderer.material = chaseMaterial;
+                arrowImage.color = new Color(200, 0, 0, 150);
                 break;
         }
+    }
+
+    private void PointArrowAtEnemy() {
+        Vector3 playerForward = new Vector3(_camera.transform.forward.x, 0, _camera.transform.forward.z).normalized;
+        Vector3 directionToPlayer = -getDirectionToPlayer().normalized;
+        float angle = Vector3.SignedAngle(playerForward, directionToPlayer, Vector3.down);
+        image.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private void updateDetectArrow() {
+        arrowImage.fillAmount = detectTimer / alertActivateTimer;
     }
 }

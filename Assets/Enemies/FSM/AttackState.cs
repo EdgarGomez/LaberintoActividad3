@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackState : State<EnemyController> {
     [SerializeField] private float attackRange;
-    [SerializeField] private float attackCharge = 1f;
+    [SerializeField] private float attackCharge = 1.5f;
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
@@ -18,9 +18,7 @@ public class AttackState : State<EnemyController> {
 
     public IEnumerator AttackCoroutine() {
         yield return new WaitForSeconds(attackCharge);
-        Debug.Log("Attack attempt!!");
         if (controller.getDirectionToPlayer().magnitude < attackRange) {
-            Debug.Log("Hit!!");
             PlayerHealth playerHealth = controller.getPlayerHealth();
             playerHealth.TakeDamage(15);
         }
