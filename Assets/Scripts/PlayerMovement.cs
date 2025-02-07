@@ -9,6 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 10f;
     [SerializeField] private float jumpHeigh = 2f;
     [SerializeField] private float gravity = -9.8f;
+    [SerializeField] private float mouseSensitivity = 2f;
+    [SerializeField] private float maxLookUpAngle = 80f;
+    [SerializeField] private float maxLookDownAngle = -60f;
+    private float rotationX = 0f;
+    [SerializeField] private Transform playerBody;
+
 
     public float walkStepRate = 0.5f;
     public float runStepRate = 0.3f;
@@ -40,16 +46,17 @@ public class PlayerMovement : MonoBehaviour
        audioSource = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cameraTransform.localRotation = Quaternion.identity;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        HandleRotation();
         MovePlayer();
         AplicarSalto();
         HandleAttack();
-        cameraTransform = Camera.main.transform;
-
         PlayFootstepSound();
         UpdateAnimator();
     }
@@ -75,13 +82,12 @@ public class PlayerMovement : MonoBehaviour
         isMoving = (horizontal != 0 || vertical != 0);
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        Vector3 direccion = cameraTransform.right * horizontal + cameraTransform.forward * vertical;
+        Vector3 forward = transform.forward;
+        Vector3 right = transform.right;
+        Vector3 direction = (forward * vertical + right * horizontal).normalized;
 
-        direccion.y = 0;
-
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : speed;
-
-        characterController.Move(direccion.normalized * currentSpeed * Time.deltaTime);
+        float currentSpeed = isRunning ? runSpeed : speed;
+        characterController.Move(direction * currentSpeed * Time.deltaTime);
     }
 
     void AplicarSalto()
@@ -123,4 +129,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking) isAttacking = false;
     }
+
+    void HandleRotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + mouseX, 0);
+
+        rotationX -= mouseY;
+        rotationX = Mathf.Clamp(rotationX, maxLookDownAngle, maxLookUpAngle);
+        cameraTransform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+    }
+
 }
