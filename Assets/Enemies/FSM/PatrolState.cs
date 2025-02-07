@@ -21,7 +21,7 @@ public class PatrolState : State<EnemyController> {
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-        
+        controller.PlayWalkAnimation();
         controller.updateDetectInfo(0);
     }
 
@@ -42,7 +42,8 @@ public class PatrolState : State<EnemyController> {
     }
 
     public override void OnExitState() {
-        
+        controller.PlayIdleAnimation();
+
     }
 
     public void updatePoint() {

@@ -9,7 +9,7 @@ public class IdleState : State<EnemyController> {
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-        
+        controller.PlayIdleAnimation();
         coroutineComplete = false;
         waitRoutine = StartCoroutine(waitToContinue());
         

@@ -8,15 +8,17 @@ public class AttackState : State<EnemyController> {
 
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-        
         StartCoroutine(AttackCoroutine());
     }
 
     public override void OnUpdateState() { }
 
-    public override void OnExitState() { }
+    public override void OnExitState() {
+        controller.PlayIdleAnimation();
+    }
 
     public IEnumerator AttackCoroutine() {
+        controller.PlayAttackAnimation();
         yield return new WaitForSeconds(attackCharge);
         if (controller.getDirectionToPlayer().magnitude < attackRange) {
             PlayerHealth playerHealth = controller.getPlayerHealth();

@@ -39,8 +39,12 @@ public class EnemyController : Controller {
     [SerializeField] private RectTransform image;
     [SerializeField] private Image arrowImage;
     [SerializeField] private Camera _camera;
-    
+
+    private Animator animator;
+
+
     void Start() {
+        animator = GetComponent<Animator>();
         patrolState = GetComponent<PatrolState>();
         idleState = GetComponent<IdleState>();
         alertState = GetComponent<AlertState>();
@@ -157,5 +161,31 @@ public class EnemyController : Controller {
 
     private void updateDetectArrow() {
         arrowImage.fillAmount = detectTimer / alertActivateTimer;
+    }
+
+    public void PlayIdleAnimation()
+    {
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsRunning", false);
+        animator.SetBool("IsAttacking", false);
+    }
+
+    public void PlayWalkAnimation()
+    {
+        animator.SetBool("IsWalking", true);
+        animator.SetBool("IsRunning", false);
+        animator.SetBool("IsAttacking", false);
+    }
+
+    public void PlayRunAnimation()
+    {
+        animator.SetBool("IsWalking", false);
+        animator.SetBool("IsRunning", true);
+        animator.SetBool("IsAttacking", false);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        animator.SetBool("IsAttacking", true);
     }
 }

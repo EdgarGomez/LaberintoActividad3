@@ -8,6 +8,7 @@ public class ChaseState : State<EnemyController> {
         base.OnEnterState(controller);
 
         Debug.Log("Chasing!");
+        controller.PlayRunAnimation();
         controller.navMeshAgent.speed *= 3f;
         controller.navMeshAgent.updateRotation = false;
         
@@ -32,5 +33,6 @@ public class ChaseState : State<EnemyController> {
     public override void OnExitState() {
         controller.navMeshAgent.speed /= 3f;
         controller.navMeshAgent.updateRotation = true;
+        controller.PlayIdleAnimation();
     }
 }
