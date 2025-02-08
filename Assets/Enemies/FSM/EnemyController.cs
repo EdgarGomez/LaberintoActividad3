@@ -65,7 +65,6 @@ public class EnemyController : Controller {
     void Update() {
         PointArrowAtEnemy();
         updateDetectArrow();
-        Debug.Log(detectTimer);
         if (currentState != null) {
             currentState.OnUpdateState();
         }

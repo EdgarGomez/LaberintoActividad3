@@ -28,7 +28,7 @@ public class PatrolState : State<EnemyController> {
 
     public override void OnUpdateState() {
         controller.navMeshAgent.SetDestination(points[pointIndex]);
-
+        
         if (!controller.navMeshAgent.pathPending &&
             controller.navMeshAgent.remainingDistance <= stoppingDistanceRoute) {
             controller.ChangeState(controller.idleState);

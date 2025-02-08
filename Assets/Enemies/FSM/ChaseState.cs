@@ -6,8 +6,7 @@ using UnityEngine;
 public class ChaseState : State<EnemyController> {
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-
-        Debug.Log("Chasing!");
+        
         controller.PlayRunAnimation();
         controller.navMeshAgent.speed *= 3f;
         controller.navMeshAgent.updateRotation = false;
