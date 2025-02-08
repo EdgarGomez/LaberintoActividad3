@@ -92292,10 +92292,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalKeys: 5
+  score: 0
   keysText: {fileID: 1426972770}
+  scoreText: {fileID: 0}
   finalDoor: {fileID: 1707986827}
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 539d0353b71ab7f41af453b661ae3035, type: 3}
+  recollectScore: {fileID: 0}
 --- !u!4 &1988830736
 Transform:
   m_ObjectHideFlags: 0

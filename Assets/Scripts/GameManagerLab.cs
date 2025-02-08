@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private int keysCollected = 0;
     public int totalKeys = 5;
+    public int score;
     public TMP_Text keysText;
+    public TMP_Text scoreText;
     public Door finalDoor;
     public AudioSource audioSource;
-    public AudioClip audioClip;
+    public AudioClip recollectScore;
     private void Awake()
-    {
+    { 
         audioSource = GetComponent<AudioSource>();
         if (instance == null)
         {
@@ -39,6 +41,14 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(audioSource.clip);
             finalDoor.OpenDoor(); 
         }
+    }
+
+    public void AddCollectible(Transform playerTransform)
+    {
+        audioSource.transform.position = playerTransform.position;
+        audioSource.PlayOneShot(recollectScore);
+        score += 10;
+        scoreText.text = "Score: " + score.ToString();
     }
     
 
