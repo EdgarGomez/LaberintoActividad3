@@ -88,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
     {
         audioSource.PlayOneShot(death);
         muerte.gameObject.SetActive(true);
-        gameOver.gameObject.SetActive(true);
+        // gameOver.gameObject.SetActive(true);
         if (characterController != null)
         {
             characterController.enabled = false;
@@ -108,6 +108,14 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator ReturnToMenu()
     {
         yield return new WaitForSeconds(3f);
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script != this)
+            {
+                script.enabled = true;
+            }
+        }
         SceneManager.LoadScene(0);
     }
     // Update is called once per frame

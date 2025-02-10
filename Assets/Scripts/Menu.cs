@@ -17,6 +17,8 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         resolutions = Screen.resolutions;
         foreach (var resolution in resolutions)
         {
