@@ -89,6 +89,7 @@ public class EnemyController : Controller {
     }
 
     public void ChangeState(State<EnemyController> state) {
+        Debug.Log(state.ToString());
         if (currentState != null) {
             currentState.OnExitState();
         }

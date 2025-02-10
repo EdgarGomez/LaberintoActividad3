@@ -23,12 +23,12 @@ public class PatrolState : State<EnemyController> {
         base.OnEnterState(controller);
         controller.PlayWalkAnimation();
         controller.updateDetectInfo(0);
+
+        controller.navMeshAgent.SetDestination(points[pointIndex]);
     }
 
 
     public override void OnUpdateState() {
-        controller.navMeshAgent.SetDestination(points[pointIndex]);
-        
         if (!controller.navMeshAgent.pathPending &&
             controller.navMeshAgent.remainingDistance <= stoppingDistanceRoute) {
             controller.ChangeState(controller.idleState);
