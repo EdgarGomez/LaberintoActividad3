@@ -42,7 +42,6 @@ public class EnemyController : Controller {
 
     private Animator animator;
 
-
     void Start() {
         animator = GetComponent<Animator>();
         patrolState = GetComponent<PatrolState>();
@@ -59,7 +58,20 @@ public class EnemyController : Controller {
 
         navMeshAgent = GetComponent<NavMeshAgent>();
 
+        GameManager.instance.onRespawn += resetBehaviour;
+
         ChangeState(patrolState);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.onRespawn -= resetBehaviour;
+    }
+
+    private void resetBehaviour()
+    {
+        ChangeState(patrolState);
+        detectTimer = 0;
     }
 
     void Update() {

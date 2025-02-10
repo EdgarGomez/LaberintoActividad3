@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1090236016766960666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3153006717362936595}
+  m_Layer: 21
+  m_Name: AudioS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3153006717362936595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090236016766960666}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3453421468808715585}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423633763121426411
 GameObject:
   m_ObjectHideFlags: 0
@@ -5336,31 +5367,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.3
+      value: 18.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.106
+      value: 0.03000009
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.55841
+      value: 18.68
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.0000029504295
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5368,7 +5399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -5392,6 +5423,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8324223234939640632}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3153006717362936595}
     - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: ab6c2c0f1b4dffe4299ded491da684c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7840011442234890313}
@@ -5444,8 +5478,12 @@ MonoBehaviour:
   maxHealth: 100
   audioSource: {fileID: 943610790063062518}
   hit: {fileID: 8300000, guid: 43ce2043422ea314b918513bb9220bc6, type: 3}
+  death: {fileID: 8300000, guid: f43dc52d6ce9be84597a62793405128d, type: 3}
   healthBar: {fileID: 0}
   respawnPoint: {fileID: 0}
+  muerte: {fileID: 0}
+  vidasText: {fileID: 0}
+  gameOver: {fileID: 0}
 --- !u!114 &5615366229297622122
 MonoBehaviour:
   m_ObjectHideFlags: 0

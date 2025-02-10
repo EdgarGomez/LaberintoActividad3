@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,28 +7,34 @@ public class AttackState : State<EnemyController> {
     [SerializeField] private float attackRange;
     [SerializeField] private float attackCharge = 1.5f;
 
+    private bool coroutineActive;
+    private Coroutine coroutine;
+
     public override void OnEnterState(EnemyController controller) {
         base.OnEnterState(controller);
-        StartCoroutine(AttackCoroutine());
+        coroutine = StartCoroutine(AttackCoroutine());
     }
 
     public override void OnUpdateState() { }
 
     public override void OnExitState() {
+        if (coroutineActive)
+        {
+            StopCoroutine(coroutine);
+        }
         controller.PlayIdleAnimation();
     }
 
     public IEnumerator AttackCoroutine() {
+        coroutineActive = true;
         controller.PlayAttackAnimation();
         yield return new WaitForSeconds(attackCharge);
-        Debug.Log(controller.getDirectionToPlayer().magnitude);
         if (controller.getDirectionToPlayer().magnitude < attackRange) {
-            Debug.Log("HIT!!");
             PlayerHealth playerHealth = controller.getPlayerHealth();
             playerHealth.TakeDamage(15);
-        } else {
-            Debug.Log("NO HIT!!");
         }
+        yield return new WaitForSeconds(1.1f);
+        coroutineActive = false;
         controller.ChangeState(controller.chaseState);
     }
 }

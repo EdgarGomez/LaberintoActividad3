@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -50,11 +51,11 @@ public class GameManager : MonoBehaviour
         score += 10;
         scoreText.text = "Score: " + score.ToString();
     }
-    
 
-    // Update is called once per frame
-    void Update()
+    public event Action onRespawn;
+
+    public void invokeRespawn()
     {
-        
+        onRespawn?.Invoke();
     }
 }

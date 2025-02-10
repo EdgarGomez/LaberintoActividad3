@@ -50,6 +50,9 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Corutina");
         yield return new WaitForSeconds(0.1f);
+
+        GameManager.instance.invokeRespawn();
+
         characterController.enabled = false;
         transform.position = respawnPoint.position;
         characterController.enabled = true;
